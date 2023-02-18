@@ -15,6 +15,14 @@ function Input() {
     setPrice(revalue)
   }
 
+  const validationCheck = () => {
+    if(name === "" || price === "") {
+      alert("이름과 가격을 모두 입력하세요!")
+    } else {
+      alert(`{ name : ${name}, price: ${price} }`)
+    }
+  }
+
   return (
 
     <>
@@ -35,7 +43,7 @@ function Input() {
         onChange={priceChangeHandler}
       />
 
-      <button>저장</button>
+      <button onClick={validationCheck}>저장</button>
     </>
   )
 }
