@@ -5,7 +5,7 @@ import Modal from './components/Modal';
 import Input from './components/Input';
 import Button from './components/Button';
 import { MdArrowForwardIos, MdAddAlert } from 'react-icons/md'
-import SelectComp from './components/SelectComp';
+import Modal2 from './components/Modal2';
 
 const largePrimary = () => {
   alert('버튼을 만들어보세요')
@@ -29,9 +29,8 @@ function App() {
         <Button wd={"80px"} hg={"30px"} bor="2px solid rgb(250, 177, 160)" bgColor="rgb(250, 177, 160)">Small</Button>
       </div>
       <Input />
-      <Modal />
+      <Modal /><Modal2 />
       <Select />
-      {/* <SelectComp /> */}
     </>
   );
 }
