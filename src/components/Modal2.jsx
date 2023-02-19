@@ -186,11 +186,11 @@ function Modal2() {
                     <button onClick={() => setModalState(true)}>openModal</button>
                     {
                         modalState === true
-                            ? <div>
+                            ? <ModalContain>
                                 <p>닫기 버튼 1개가 있고, <br />
                                 외부 영역을 누르면 모달이 닫혀요.</p>
                                 <button onClick={() => setModalState(false)}>X</button>
-                            </div>
+                            </ModalContain>
                             : null
                     }
                 </Wrap>
@@ -204,4 +204,7 @@ export default Modal2
 const Wrap = styled.div`
     width: 100vw;
     height: 100vh;
+`
+const ModalContain = styled.div`
+    border: 1px solid red;
 `
