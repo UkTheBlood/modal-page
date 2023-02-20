@@ -17,35 +17,71 @@ function Select() {
     setSelectState(false)
   });
 
-  const stateTrue = () => {
-    setSelectState(true)
-  }  
   const stateFalse = (id) => {
     setSelectState(false)
     setTitle(id)
   }
 
 
+
+  const options2 = [
+    { id: 1, title: "React"},
+    { id: 2, title: "Java"},
+    { id: 3, title: "Spring"},
+    { id: 4, title: "React Native"}
+  ]
+
+  const [selectState2, setSelectState2] =useState(false);
+  const [title2, setTitle2] = useState('react')
+
+
+  const selectref2 = useOutsideClickClose(() => {
+    setSelectState2(false)
+  });
+
+  const stateFalse2 = (id) => {
+    setSelectState2(false)
+    setTitle2(id)
+  }
+
   return (
     <>
       <StDivWrap>
-        <Div ref={selectref}>
-        <StBtnSet onClick={() => setSelectState(!selectState)}>{title}</StBtnSet>
-        {
-          selectState === true
-          ? 
-            options.map((item) => {
+        <StDivRef ref={selectref}>
+          <StBtnSet onClick={() => setSelectState(!selectState)}>{title}</StBtnSet>
+            {
+              selectState === true
+              ? 
+                options.map((item) => {
+                  return (
+                  <div key={item.id}>
+                    <div>
+                      <StBtnSet onClick={() => stateFalse(item.title)}>{item.title}</StBtnSet>
+                    </div>
+                  </div>
+                )
+                })
+              : null
+            }
+        </StDivRef>
+        <StDivSecondSelect>
+          <div ref={selectref2}>
+          <StBtnSet onClick={() => setSelectState2(!selectState2)}>{title2}</StBtnSet>
+          {
+            selectState2 === true
+            ? options2.map((item) => {
               return (
-              <div key={item.id}>
-                <div>
-                  <StBtnSet onClick={() => stateFalse(item.title)}>{item.title}</StBtnSet>
+                <div key={item.id}>
+                  <div>
+                    <StBtnSet onClick={() => stateFalse2(item.title)}>{item.title}</StBtnSet>
+                  </div>
                 </div>
-              </div>
-            )
+              )
             })
-          : null
-        }
-        </Div>
+            : null
+          }
+          </div>
+        </StDivSecondSelect>
       </StDivWrap>
     </>
   )
@@ -58,8 +94,10 @@ const StDivWrap = styled.div`
   margin: 20px;
   padding: 20px;
   height: 100px;
+  position: relative;
+  overflow: hidden;
 `
-const Div = styled.div`
+const StDivRef = styled.div`
   width: 300px;
 `
 const StBtnSet = styled.button`
@@ -71,6 +109,14 @@ const StBtnSet = styled.button`
   &:hover {
     background-color: rgba(0, 0, 0, 0.15);
   }
+`
+
+
+
+const StDivSecondSelect = styled.div`
+  position: absolute;
+  top: 20px;
+  left: 400px;
 `
 
 
