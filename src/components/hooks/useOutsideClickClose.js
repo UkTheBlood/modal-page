@@ -2,7 +2,6 @@ import { useEffect, useRef } from "react";
 
 export const useOutsideClickClose = (handler) => {
     const ref = useRef(null);
-    console.log(ref)
 
     useEffect(() => {
         function handleClickOutside(event) {

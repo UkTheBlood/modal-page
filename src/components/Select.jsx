@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import styled from 'styled-components';
+import { useOutsideClickClose } from './hooks/useOutsideClickClose';
 
 function Select() {
   const options = [
@@ -8,35 +10,68 @@ function Select() {
     { id: 4, title: "React Native"}
   ]
   const [selectState, setSelectState] =useState(false);
-  const [title, seTitle] = useState('react')
+  const [title, setTitle] = useState('react')
 
+
+  const selectref = useOutsideClickClose(() => {
+    setSelectState(false)
+  });
 
   const stateTrue = () => {
     setSelectState(true)
   }  
-  const stateFalse = () => {
+  const stateFalse = (id) => {
     setSelectState(false)
+    setTitle(id)
   }
 
 
   return (
     <>
-    <button onClick={() => setSelectState(true)}>{title}</button>
-    {
-      selectState === true
-      ? 
-        options.map((item) => {
-          <div>{item.title}</div>
-        })
-      : null
-    }
+      <StDivWrap>
+        <Div ref={selectref}>
+        <StBtnSet onClick={() => setSelectState(!selectState)}>{title}</StBtnSet>
+        {
+          selectState === true
+          ? 
+            options.map((item) => {
+              return (
+              <div key={item.id}>
+                <div>
+                  <StBtnSet onClick={() => stateFalse(item.title)}>{item.title}</StBtnSet>
+                </div>
+              </div>
+            )
+            })
+          : null
+        }
+        </Div>
+      </StDivWrap>
     </>
   )
 }
 
 export default Select
 
-
+const StDivWrap = styled.div`
+  border: 2px solid rgba(0, 0, 0, 0.15);
+  margin: 20px;
+  padding: 20px;
+  height: 100px;
+`
+const Div = styled.div`
+  width: 300px;
+`
+const StBtnSet = styled.button`
+  width: 300px;
+  height: 35px;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.15);
+  }
+`
 
 
 

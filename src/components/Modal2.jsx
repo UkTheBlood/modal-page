@@ -221,6 +221,8 @@
 // const ModalContain = styled.div`
 //     border: 1px solid red;
 // `
+
+
 import React, { useState } from 'react'
 import { useOutsideClickClose } from './hooks/useOutsideClickClose';
 
