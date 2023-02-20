@@ -224,6 +224,7 @@
 
 
 import React, { useState } from 'react'
+import styled from 'styled-components';
 import { useOutsideClickClose } from './hooks/useOutsideClickClose';
 
 function Modal2() {
@@ -238,12 +239,19 @@ function Modal2() {
                 <button onClick={() => setModalState(true)}>openModal</button>
                 {
                     modalState === true
-                    ? <div ref={modalref}>
-                        <p>외부 영역을 클릭하거나, <br />
-                        X 버튼을 누르면 닫혀요.</p>
-                        <button onClick={() => setModalState(false)}>X</button>
-                    </div>
-                    : null
+                        ?
+                        <ModalContainer>
+                            <StModalContents>
+                                <Container>
+                                    <div ref={modalref}>
+                                        <p>외부 영역을 클릭하거나, <br />
+                                            X 버튼을 누르면 닫혀요.</p>
+                                        <button onClick={() => setModalState(false)}>X</button>
+                                    </div>
+                                </Container>
+                            </StModalContents>
+                        </ModalContainer>
+                        : null
                 }
             </div>
         </>
@@ -251,3 +259,28 @@ function Modal2() {
 }
 
 export default Modal2
+
+
+const ModalContainer = styled.div`
+  display: flex;
+  position: fixed;
+  z-index: 1;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+`
+const StModalContents = styled.div`
+  width: 300px;
+  height: 300px;
+  background-color: lightgray;
+  margin: auto;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`
+const Container = styled.div`
+  display: flex;
+`
