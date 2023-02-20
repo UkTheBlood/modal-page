@@ -64,7 +64,9 @@ function Select() {
               : null
             }
         </StDivRef>
-        <StDivSecondSelect>
+        
+      </StDivWrap>
+      <StDivSecondSelect>
           <div ref={selectref2}>
           <StBtnSet onClick={() => setSelectState2(!selectState2)}>{title2}</StBtnSet>
           {
@@ -82,7 +84,6 @@ function Select() {
           }
           </div>
         </StDivSecondSelect>
-      </StDivWrap>
     </>
   )
 }
@@ -110,12 +111,14 @@ const StBtnSet = styled.button`
     background-color: rgba(0, 0, 0, 0.15);
   }
 `
-
+const StDivFixed = styled.div`
+  position: fixed;
+`
 
 
 const StDivSecondSelect = styled.div`
   position: absolute;
-  top: 20px;
+  top: 547px;
   left: 400px;
 `
 
