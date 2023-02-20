@@ -166,45 +166,86 @@
 //     background-color: rgba(0, 0, 0, 0.15);
 // `
 
-import React, { useRef, useState } from 'react'
-import styled from 'styled-components';
+// import React, { useRef, useState } from 'react'
+// import styled from 'styled-components';
+
+// function Modal2() {
+//     const [modalState, setModalState] = useState(false);
+//     const outside = useRef();
+
+//     const modalOutSideClick = (e) => {
+//         if (outside.current === e.target) {
+//             setModalState(false)
+//         }
+//     }
+
+//     return (
+//         <>
+//             <div>
+//                 <Wrap>
+//                     {
+//                         modalState === true
+//                         ? <All ref={outside} onClick={modalOutSideClick}/>
+//                         : null
+//                     }
+//                     <button onClick={() => setModalState(true)}>openModal</button>
+//                     {
+//                         modalState === true
+//                             ? <ModalContain>
+//                                 <p>닫기 버튼 1개가 있고, <br />
+//                                     외부 영역을 누르면 모달이 닫혀요.</p>
+//                                 <button onClick={() => setModalState(false)}>X</button>
+//                             </ModalContain>
+//                             : null
+//                     }
+//                 </Wrap>
+//             </div>
+//         </>
+//     )
+// }
+
+// export default Modal2
+// const All = styled.div`
+//     position: fixed;
+//     width: 100%;
+//     height: 100%;
+//     background-color: rgba(0, 0, 0, 0.1);
+//     left: 0;
+//     top: 0;
+// `
+
+// const Wrap = styled.div`
+//     width: 100vw;
+//     height: 200px;
+// `
+// const ModalContain = styled.div`
+//     border: 1px solid red;
+// `
+import React, { useState } from 'react'
+import { useOutsideClickClose } from './hooks/useOutsideClickClose';
 
 function Modal2() {
     const [modalState, setModalState] = useState(false);
-    const outside = useRef();
-
-    const modalOutSideClick = (e) => {
-        if(outside.current === e.target) {
-            setModalState(false)
-        }
-    }
+    const modalref = useOutsideClickClose(() => {
+        setModalState(false)
+    });
 
     return (
         <>
             <div>
-                <Wrap ref={outside} onClick={modalOutSideClick}>
-                    <button onClick={() => setModalState(true)}>openModal</button>
-                    {
-                        modalState === true
-                            ? <ModalContain>
-                                <p>닫기 버튼 1개가 있고, <br />
-                                외부 영역을 누르면 모달이 닫혀요.</p>
-                                <button onClick={() => setModalState(false)}>X</button>
-                            </ModalContain>
-                            : null
-                    }
-                </Wrap>
+                <button onClick={() => setModalState(true)}>openModal</button>
+                {
+                    modalState === true
+                    ? <div ref={modalref}>
+                        <p>외부 영역을 클릭하거나, <br />
+                        X 버튼을 누르면 닫혀요.</p>
+                        <button onClick={() => setModalState(false)}>X</button>
+                    </div>
+                    : null
+                }
             </div>
         </>
     )
 }
 
 export default Modal2
-
-const Wrap = styled.div`
-    width: 100vw;
-    height: 100vh;
-`
-const ModalContain = styled.div`
-    border: 1px solid red;
-`
